@@ -34,6 +34,7 @@ function Home(props) {
     const [instituteAddress,setInstituteAddress]= useState("")
     const [studentEnroll, setStudentEnroll]= useState("")
     const [openDialog,setOpenDialog] = useState(false);
+    const [openGetDialog,setOpenGetDialog] = useState(false);
     const [openSnackbar, setOpenSnackbar] =useState(false);
     const [buffer,setBuffer]= useState("")
     const [IPFSHash,setIpfsHash] = useState(null)
@@ -115,6 +116,8 @@ function Home(props) {
         }, (error, transactionHash) => {
             console.log(`Transaction Hash : ${transactionHash}`);
             setTransactionHash({transactionHash});
+            setOpenDialog(false)
+            alert("Student Added Successfully")
         });
 
         //   storehash.methods.sendHash(this.state.ipfsHash).send({
@@ -129,6 +132,10 @@ function Home(props) {
       const onStudentEnrollSubmit = (e)=>{
           setStudentEnroll(e.target.value);
         //   console.log(studentEnroll)
+      }
+
+      const onGetButtonClick=()=>{
+          
       }
     
 
@@ -182,9 +189,41 @@ function Home(props) {
                     </DialogContent>
                 </Dialog>
             }
+            {
+                <Dialog open={openGetDialog} onClose={()=>setOpenGetDialog(false)}>
+                    <DialogContent className="dialog__content">
+                        <TextField
+                            value={studentEnroll}
+                            onChange={onStudentEnrollSubmit}
+                            autoFocus
+                            margin="dense"
+                            id="name"
+                            label="Student Enrollment Number"
+                            fullWidth
+
+                        />  
+                        <TextField
+                            value={studentEnroll}
+                            onChange={onStudentEnrollSubmit}
+                            autoFocus
+                            margin="dense"
+                            id="name"
+                            label="Institute Address"
+                            fullWidth
+                        />
+                        <form>
+                            <button 
+                            onClick={onGetButtonClick}
+                            type="submit"> 
+                                Get
+                            </button>
+                        </form>
+                    </DialogContent>
+                </Dialog>
+            }
             <div className="home__button">
                 <button onClick={()=>setOpenDialog(true)}>Add New Student ID</button>
-                <button>Get Student ID</button>
+                <button onClick={()=>setOpenGetDialog(true)}>Get Student ID</button>
             </div>
             {openSnackbar?(
                 <Snackbar

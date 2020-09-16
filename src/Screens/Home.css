@@ -63,7 +63,7 @@
 .home__button>button{
     padding: 10px;
     width: 150%;
-    margin-left: -20px;
+    margin-left: -30px;
     font-size: 18px;
     border-radius: 5px;
     background-color: white;
@@ -72,6 +72,7 @@
     box-shadow: 2px 7px 17px 1px rgba(0,0,0,0.75);
     border: none;
     font-family: "Recursive",serif;
+    margin-bottom: 10px;
 }
 
 .home__button>button:hover{
