@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import "./Register.css"
 import SchoolIcon from '@material-ui/icons/School';
-import BusinessIcon from '@material-ui/icons/Business';
 import {Link} from "react-router-dom"
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -13,8 +12,6 @@ import { useHistory } from "react-router-dom";
 function Register() {
 
     const [instituteName,setInstituteName] = useState("")
-    // const [instituteAddress,setInstituteAddress]= useState("")
-    const [accounts,setAccount]=useState(null)
     const history = useHistory()
 
     const ethEnabled = () => {
@@ -59,9 +56,6 @@ function Register() {
     }
     }
 
-    // const handleAddressChange = (e)=>{
-    //     setInstituteAddress(e.target.value)
-    // }
 
     const handleNameChange = (e)=>{
         setInstituteName(e.target.value)
@@ -71,15 +65,7 @@ function Register() {
         <div className="register">
             <div className="register__container">
                 <h1>Register</h1>
-                <form onSubmit={onFormSubmit}  className="register__input">
-                    {/* <div className="address">
-                        <BusinessIcon style={{marginRight:"10px"}}/>
-                        <TextField
-                        className="textfield"
-                        value={instituteAddress}
-                        onChange={handleAddressChange}
-                        label="Enter Institute Address" />
-                    </div> */}
+                <form onSubmit={onFormSubmit}  className="register__input"> 
                     <div className="name">
                     <SchoolIcon style={{marginRight:"10px"}}/>
                     <TextField
@@ -91,9 +77,8 @@ function Register() {
                 </form>
                 <div className="register__button">
                 <Link style={{ textDecoration: 'none',color:"black" }} to={{
-                    pathname:"/register",
+                    pathname:"/login",
                     instituteName:{instituteName},
-                    // instituteAddress:{instituteAddress}
                 }} >
                     <Button 
                     onClick={onFormSubmit}
