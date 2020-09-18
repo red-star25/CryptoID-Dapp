@@ -11,14 +11,15 @@ import CloseIcon from '@material-ui/icons/Close';
 import web3 from '../web3';
 import ipfs from '../ipfs';
 import cryptoid from "../crpytoid";
-import Web3 from "web3"
 
 function Home(props) {
     
-        useEffect(async()=>{
+        useEffect(()=>{
             // ethEnabled()
             setValues()
+           
         },[]);
+
 
         // const ethEnabled = () => {
         //     if (window.web3) {
@@ -28,27 +29,25 @@ function Home(props) {
         //     }
         //     return false;
         //   }
-
+    
     const history = useHistory();
     const [instituteName,setInstituteName] = useState("")
     const [instituteAddress,setInstituteAddress]= useState("")
+    const [instituteGetAddress,setInstituteGetAddress]= useState()
     const [studentEnroll, setStudentEnroll]= useState("")
+    const [studentGetEnroll, setStudentGetEnroll]= useState()
     const [openDialog,setOpenDialog] = useState(false);
     const [openGetDialog,setOpenGetDialog] = useState(false);
-    const [openSnackbar, setOpenSnackbar] =useState(false);
     const [buffer,setBuffer]= useState("")
     const [IPFSHash,setIpfsHash] = useState(null)
     const [ethAddress,setEthAddress] =useState("")
     const [transactionHash,setTransactionHash] = useState()
+    const [getIPFSHash,setgetIpfsHash] = useState(null)
+    
 
 
-
-    const handleSnackbarClose=(event,reason)=>{
-          setOpenSnackbar(false);
-    }
     const handleAddDialog=()=>{
         setOpenDialog(false);
-        setOpenSnackbar(true)
     }
     
     const setValues = ()=>{
@@ -81,8 +80,8 @@ function Home(props) {
 
         //bring in user's metamask account address
         
-        const accounts = await web3.eth.getAccounts();
-        console.log('Sending from Metamask account: ' + accounts);
+         const accounts = await web3.eth.getAccounts();
+        // console.log('Sending from Metamask account: ' + accounts);
         //obtain contract address from storehash.js
         
         const ethAddress= cryptoid.options.address;
@@ -134,8 +133,20 @@ function Home(props) {
         //   console.log(studentEnroll)
       }
 
-      const onGetButtonClick=()=>{
-          
+      const studentGetEnrollInput = (e)=>{
+          setStudentGetEnroll(e.target.value)
+      }
+
+      const instituteGetAddressInput=(e)=>{
+          setInstituteGetAddress(e.target.value)
+      }
+
+      const onGetButtonClick=async()=>{
+        //   console.log("in Get Button Click");
+        // console.log(`${studentGetEnroll} ${instituteGetAddress}`)
+       await cryptoid.methods.getIdentityCard(studentGetEnroll,instituteGetAddress).call().then(e=>console.log(e));
+    
+        
       }
     
 
@@ -190,11 +201,12 @@ function Home(props) {
                 </Dialog>
             }
             {
-                <Dialog open={openGetDialog} onClose={()=>setOpenGetDialog(false)}>
+                openGetDialog?(
+                    <Dialog open={openGetDialog} onClose={()=>setOpenGetDialog(false)}>
                     <DialogContent className="dialog__content">
                         <TextField
-                            value={studentEnroll}
-                            onChange={onStudentEnrollSubmit}
+                            value={studentGetEnroll}
+                            onChange={studentGetEnrollInput}
                             autoFocus
                             margin="dense"
                             id="name"
@@ -203,47 +215,24 @@ function Home(props) {
 
                         />  
                         <TextField
-                            value={studentEnroll}
-                            onChange={onStudentEnrollSubmit}
-                            autoFocus
+                            value={instituteGetAddress}
+                            onChange={instituteGetAddressInput}
                             margin="dense"
                             id="name"
                             label="Institute Address"
                             fullWidth
                         />
-                        <form>
-                            <button 
-                            onClick={onGetButtonClick}
-                            type="submit"> 
+                            <button onClick={onGetButtonClick}> 
                                 Get
                             </button>
-                        </form>
                     </DialogContent>
                 </Dialog>
+                ):<div/>   
             }
             <div className="home__button">
                 <button onClick={()=>setOpenDialog(true)}>Add New Student ID</button>
                 <button onClick={()=>setOpenGetDialog(true)}>Get Student ID</button>
             </div>
-            {openSnackbar?(
-                <Snackbar
-                anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-                }}
-                open={openSnackbar}
-                autoHideDuration={6000}
-                onClose={handleSnackbarClose}
-                message="Student Added"
-                action={
-                <React.Fragment>
-                    <IconButton size="small" aria-label="close" color="inherit" onClick={handleSnackbarClose}>
-                    <CloseIcon fontSize="small" />
-                    </IconButton>
-                </React.Fragment>
-                }
-            />
-            ):<div/>}
             
         </div>
     )
