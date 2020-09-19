@@ -33,9 +33,9 @@ function Home(props) {
     const history = useHistory();
     const [instituteName,setInstituteName] = useState("")
     const [instituteAddress,setInstituteAddress]= useState("")
-    const [instituteGetAddress,setInstituteGetAddress]= useState()
+    const [instituteGetAddress,setInstituteGetAddress]= useState("")
     const [studentEnroll, setStudentEnroll]= useState("")
-    const [studentGetEnroll, setStudentGetEnroll]= useState()
+    const [studentGetEnroll, setStudentGetEnroll]= useState(null)
     const [openDialog,setOpenDialog] = useState(false);
     const [openGetDialog,setOpenGetDialog] = useState(false);
     const [buffer,setBuffer]= useState("")
@@ -142,11 +142,11 @@ function Home(props) {
       }
 
       const onGetButtonClick=async()=>{
-        //   console.log("in Get Button Click");
+          console.log("in Get Button Click");
+        //   console.log(`${typeof parseInt(studentGetEnroll)} ${typeof instituteGetAddress}`);
         // console.log(`${studentGetEnroll} ${instituteGetAddress}`)
-       await cryptoid.methods.getIdentityCard(studentGetEnroll,instituteGetAddress).call().then(e=>console.log(e));
-    
-        
+        const temp = await cryptoid.methods.getIdentityCard(studentGetEnroll,instituteGetAddress).call()
+        setgetIpfsHash(temp)
       }
     
 
@@ -167,10 +167,10 @@ function Home(props) {
                             <p >Institute Address</p>
                             <p>{instituteAddress??""}</p>
                         </div>
-                        <div className="body__input">
+                        {/* <div className="body__input">
                             <p>Student Count</p>
                             <center><h3>10</h3></center>
-                        </div>
+                        </div> */}
                     </form>
                 ):
                 <Dialog open={openDialog} onClose={()=>setOpenDialog(false)}>
@@ -222,6 +222,11 @@ function Home(props) {
                             label="Institute Address"
                             fullWidth
                         />
+                        {
+                            getIPFSHash?(
+                                <h3>Your IPFS hash : ${getIPFSHash}</h3>
+                            ):<div/>
+                        }
                             <button onClick={onGetButtonClick}> 
                                 Get
                             </button>
