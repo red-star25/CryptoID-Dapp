@@ -33,9 +33,9 @@ function Home(props) {
     const history = useHistory();
     const [instituteName,setInstituteName] = useState("")
     const [instituteAddress,setInstituteAddress]= useState("")
-    const [instituteGetAddress,setInstituteGetAddress]= useState("")
+    const [instituteGetAddress,setInstituteGetAddress]= useState()
     const [studentEnroll, setStudentEnroll]= useState("")
-    const [studentGetEnroll, setStudentGetEnroll]= useState(null)
+    const [studentGetEnroll, setStudentGetEnroll]= useState()
     const [openDialog,setOpenDialog] = useState(false);
     const [openGetDialog,setOpenGetDialog] = useState(false);
     const [buffer,setBuffer]= useState("")
@@ -100,7 +100,7 @@ function Home(props) {
         
           //setState by setting ipfsHash to ipfsHash[0].hash 
         //cryptoid.methods.newIdentityCard({enrollmentNumber:studentEnroll,ipfsHash:ipfsHash[0].hash,_instituteName:instituteName});
-         console.log(ipfsHash)
+         //console.log(ipfsHash)
         
         setIpfsHash(ipfsHash[0].hash);
         const ipHash = ipfsHash[0].hash;
@@ -114,6 +114,7 @@ function Home(props) {
             from: accounts[0] 
         }, (error, transactionHash) => {
             console.log(`Transaction Hash : ${transactionHash}`);
+            console.log(`IPFS Hash : ${ipHash}`);
             setTransactionHash({transactionHash});
             setOpenDialog(false)
             alert("Student Added Successfully")
@@ -142,11 +143,11 @@ function Home(props) {
       }
 
       const onGetButtonClick=async()=>{
-          console.log("in Get Button Click");
-        //   console.log(`${typeof parseInt(studentGetEnroll)} ${typeof instituteGetAddress}`);
+        //   console.log("in Get Button Click");
         // console.log(`${studentGetEnroll} ${instituteGetAddress}`)
-        const temp = await cryptoid.methods.getIdentityCard(studentGetEnroll,instituteGetAddress).call()
-        setgetIpfsHash(temp)
+       const temp = await cryptoid.methods.getIdentityCard(studentGetEnroll,instituteGetAddress).call() //.then(e=>console.log(e));
+       setgetIpfsHash(temp);
+        
       }
     
 
@@ -212,7 +213,6 @@ function Home(props) {
                             id="name"
                             label="Student Enrollment Number"
                             fullWidth
-
                         />  
                         <TextField
                             value={instituteGetAddress}
@@ -222,11 +222,17 @@ function Home(props) {
                             label="Institute Address"
                             fullWidth
                         />
-                        {
-                            getIPFSHash?(
-                                <h3>Your IPFS hash : ${getIPFSHash}</h3>
-                            ):<div/>
-                        }
+                        {getIPFSHash?(
+                            <div>
+                            <h2>Your IPFS Hash is:</h2>
+                            <h3>${getIPFSHash}</h3>
+                            </div>
+                        ):(
+                            <div style={{width:"400px",backgroundColor:"red",height:"100px",wordWrap:"break-word",alignItems:"center"}}>
+                                <h3>Your IPFS hash is:<br/>jaifhiaufhauifhaifhfiahfaihaifahfaifhaiuahfauifhaiufhahf</h3>
+                            </div>
+                            
+                        )}
                             <button onClick={onGetButtonClick}> 
                                 Get
                             </button>
