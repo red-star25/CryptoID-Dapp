@@ -146,7 +146,15 @@ function Home(props) {
         //   console.log("in Get Button Click");
         // console.log(`${studentGetEnroll} ${instituteGetAddress}`)
        const temp = await cryptoid.methods.getIdentityCard(studentGetEnroll,instituteGetAddress).call() //.then(e=>console.log(e));
-       setgetIpfsHash(temp);
+       console.log(temp);
+       if(temp!=""){
+        setgetIpfsHash(temp);
+        alert("Student verified");
+       }
+       else{
+           alert("Student not verified");
+       }
+       //setgetIpfsHash(temp);
         
       }
     
@@ -223,16 +231,21 @@ function Home(props) {
                             fullWidth
                         />
                         {getIPFSHash?(
-                            <div>
-                            <h2>Your IPFS Hash is:</h2>
-                            <h3>${getIPFSHash}</h3>
+                            // <div>
+                            // <h2>Your IPFS Hash is:</h2>
+                            // <h3>${getIPFSHash}</h3>
+                            // </div>
+                            <div style={{width:"400px"/*,backgroundColor:"lightblue"*/,height:"100px",wordWrap:"break-word",alignItems:"center"}}>
+                                <h3>Your IPFS hash is:<br/>{getIPFSHash}</h3>
+                                <a href={"https://gateway.ipfs.io/ipfs/"+getIPFSHash}>Get your ID</a>
                             </div>
                         ):(
-                            <div style={{width:"400px",backgroundColor:"red",height:"100px",wordWrap:"break-word",alignItems:"center"}}>
-                                <h3>Your IPFS hash is:<br/>jaifhiaufhauifhaifhfiahfaihaifahfaifhaiuahfauifhaiufhahf</h3>
-                            </div>
+                            <div/>
+                            // <div style={{width:"400px",backgroundColor:"red",height:"100px",wordWrap:"break-word",alignItems:"center"}}>
+                            //     <h3>Your IPFS hash is:<br/>${getIPFSHash}</h3>
+                            // </div>
                             
-                        )}
+                        )};
                             <button onClick={onGetButtonClick}> 
                                 Get
                             </button>
@@ -243,7 +256,7 @@ function Home(props) {
             <div className="home__button">
                 <button onClick={()=>setOpenDialog(true)}>Add New Student ID</button>
                 <button onClick={()=>setOpenGetDialog(true)}>Get Student ID</button>
-            </div>s
+            </div>
         </div>
     )
 }
