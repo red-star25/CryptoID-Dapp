@@ -168,10 +168,10 @@ function Home(props) {
                             <p >Institute Address</p>
                             <p>{instituteAddress??""}</p>
                         </div>
-                        <div className="body__input">
+                        {/* <div className="body__input">
                             <p>Student Count</p>
                             <center><h3>10</h3></center>
-                        </div>
+                        </div> */}
                     </form>
                 ):
                 <Dialog open={openDialog} onClose={()=>setOpenDialog(false)}>
@@ -213,7 +213,6 @@ function Home(props) {
                             id="name"
                             label="Student Enrollment Number"
                             fullWidth
-
                         />  
                         <TextField
                             value={instituteGetAddress}
