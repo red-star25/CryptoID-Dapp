@@ -82,9 +82,10 @@ function Login() {
                     </Link>
                 </div>
             <Link style={{ textDecoration: 'none',color:"black" }} to="/register">
-                    <p>Dosen't have an account ?</p>
+                    <p>Doesn't have an account ?</p>
                 </Link>
             </form>
+              
         </div>
     )
 }

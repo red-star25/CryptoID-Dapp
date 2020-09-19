@@ -100,7 +100,7 @@ function Home(props) {
         
           //setState by setting ipfsHash to ipfsHash[0].hash 
         //cryptoid.methods.newIdentityCard({enrollmentNumber:studentEnroll,ipfsHash:ipfsHash[0].hash,_instituteName:instituteName});
-         //console.log(ipfsHash)
+         console.log(ipfsHash)
         
         setIpfsHash(ipfsHash[0].hash);
         const ipHash = ipfsHash[0].hash;
@@ -235,8 +235,7 @@ function Home(props) {
             <div className="home__button">
                 <button onClick={()=>setOpenDialog(true)}>Add New Student ID</button>
                 <button onClick={()=>setOpenGetDialog(true)}>Get Student ID</button>
-            </div>
-            
+            </div>s
         </div>
     )
 }
