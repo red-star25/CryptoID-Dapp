@@ -223,8 +223,16 @@ function Home(props) {
                             fullWidth
                         />
                         {getIPFSHash?(
-                            <h3>Your IPFS Hash is: ${getIPFSHash}</h3>
-                        ):(<div/>)}
+                            <div>
+                            <h2>Your IPFS Hash is:</h2>
+                            <h3>${getIPFSHash}</h3>
+                            </div>
+                        ):(
+                            <div style={{width:"400px",backgroundColor:"red",height:"100px",wordWrap:"break-word",alignItems:"center"}}>
+                                <h3>Your IPFS hash is:<br/>jaifhiaufhauifhaifhfiahfaihaifahfaifhaiuahfauifhaiufhahf</h3>
+                            </div>
+                            
+                        )}
                             <button onClick={onGetButtonClick}> 
                                 Get
                             </button>
