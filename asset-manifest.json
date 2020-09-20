@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/CryptoID-Dapp/static/css/main.2a07579f.chunk.css",
+    "main.js": "/CryptoID-Dapp/static/js/main.55644206.chunk.js",
+    "main.js.map": "/CryptoID-Dapp/static/js/main.55644206.chunk.js.map",
+    "runtime-main.js": "/CryptoID-Dapp/static/js/runtime-main.b9837bb4.js",
+    "runtime-main.js.map": "/CryptoID-Dapp/static/js/runtime-main.b9837bb4.js.map",
+    "static/js/2.7714c244.chunk.js": "/CryptoID-Dapp/static/js/2.7714c244.chunk.js",
+    "static/js/2.7714c244.chunk.js.map": "/CryptoID-Dapp/static/js/2.7714c244.chunk.js.map",
+    "index.html": "/CryptoID-Dapp/index.html",
+    "precache-manifest.a533ed1d225b2dc0e2a8d64e657d0c47.js": "/CryptoID-Dapp/precache-manifest.a533ed1d225b2dc0e2a8d64e657d0c47.js",
+    "service-worker.js": "/CryptoID-Dapp/service-worker.js",
+    "static/css/main.2a07579f.chunk.css.map": "/CryptoID-Dapp/static/css/main.2a07579f.chunk.css.map",
+    "static/js/2.7714c244.chunk.js.LICENSE.txt": "/CryptoID-Dapp/static/js/2.7714c244.chunk.js.LICENSE.txt",
+    "static/media/Home.css": "/CryptoID-Dapp/static/media/back1.08899b7b.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b9837bb4.js",
+    "static/js/2.7714c244.chunk.js",
+    "static/css/main.2a07579f.chunk.css",
+    "static/js/main.55644206.chunk.js"
+  ]
+}
